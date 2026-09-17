@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404: Page Not Found | MakeGIF" description="The page you are looking for does not exist.">
+  <div class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-16">
+    <div class="w-16 h-16 rounded-2xl bg-sage/15 text-sage flex items-center justify-center font-black text-2xl mb-6">
+      404
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
+      Page Not Found
+    </h1>
+    <p class="text-base text-slate-600 dark:text-slate-400 max-w-md mb-8">
+      We couldn't find the page you were looking for. Return to MakeGIF to convert your video.
+    </p>
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-sage hover:bg-sage-600 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      <span>Back to MakeGIF</span>
+    </a>
+  </div>
+</Layout>

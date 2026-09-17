@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#8B9A6E" />
+  <rect x="10" y="14" width="44" height="36" rx="8" fill="#F7F2EB" />
+  <!-- Film reel dots on top & bottom -->
+  <rect x="14" y="17" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="22" y="17" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="30" y="17" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="38" y="17" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="46" y="17" width="4" height="4" rx="1" fill="#8B9A6E" />
+  
+  <rect x="14" y="43" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="22" y="43" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="30" y="43" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="38" y="43" width="4" height="4" rx="1" fill="#8B9A6E" />
+  <rect x="46" y="43" width="4" height="4" rx="1" fill="#8B9A6E" />
+  
+  <!-- GIF text badge -->
+  <text x="32" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#232819" text-anchor="middle" letter-spacing="1">GIF</text>
+  
+  <!-- Loop arrow indicators -->
+  <path d="M23 27 L20 25 L23 23" stroke="#8B9A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M41 37 L44 39 L41 41" stroke="#8B9A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

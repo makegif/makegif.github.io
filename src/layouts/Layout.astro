@@ -1,0 +1,284 @@
+---
+import '../styles/global.css';
+import { defaultLang, supportedLanguages, type SupportedLanguage } from '../i18n/ui';
+import { getHreflangLinks, getLocalizedPath, useTranslations } from '../i18n/utils';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  lang?: SupportedLanguage;
+  title?: string;
+  description?: string;
+}
+
+const { lang = defaultLang, title, description } = Astro.props;
+const t = useTranslations(lang);
+
+const pageTitle = title || t('seo.title');
+const pageDescription = description || t('seo.description');
+const siteUrl = 'https://makegif.github.io';
+const canonicalUrl = `${siteUrl}${getLocalizedPath(Astro.url.pathname, lang)}`;
+const hreflangLinks = getHreflangLinks(Astro.url.pathname, siteUrl);
+const ogImageUrl = 'https://res.cloudinary.com/dpx6w78bt/image/upload/f_auto/q_auto/v1786342039/Online_Tool_rc1ybr.png';
+
+// Structured Data: WebApplication / SoftwareApplication
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  'name': 'MakeGIF',
+  'url': canonicalUrl,
+  'image': ogImageUrl,
+  'screenshot': ogImageUrl,
+  'applicationCategory': 'MultimediaApplication',
+  'operatingSystem': 'All modern web browsers with WebAssembly support',
+  'browserRequirements': 'Requires JavaScript and WebAssembly',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD',
+  },
+  'author': {
+    '@type': 'Person',
+    'name': 'Kishara Dilshan',
+    'url': 'https://buymeacoffee.com/kisharadilz',
+  },
+  'creator': {
+    '@type': 'Person',
+    'name': 'Kishara Dilshan',
+    'url': 'https://buymeacoffee.com/kisharadilz',
+  },
+  'description': pageDescription,
+  'featureList': [
+    '100% Client-Side WebAssembly Processing',
+    'Zero Server Uploads & Guaranteed Privacy',
+    'Two-Pass Adaptive Palette Generation',
+    'Real-Time Video Preview and Trimming Controls',
+    'Custom FPS and Resolution Controls',
+    'No Watermarks & No Conversion Limits',
+  ],
+};
+
+// Structured Data: Organization
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  'name': 'MakeGIF',
+  'url': siteUrl,
+  'logo': `${siteUrl}/favicon.svg`,
+  'sameAs': [
+    'https://buymeacoffee.com/kisharadilz',
+    'https://github.com/makegif/makegif.github.io',
+  ],
+};
+
+// Structured Data: BreadcrumbList
+const breadcrumbsList = [
+  {
+    '@type': 'ListItem',
+    'position': 1,
+    'name': 'Home',
+    'item': `${siteUrl}/`,
+  },
+];
+
+if (lang !== defaultLang) {
+  breadcrumbsList.push({
+    '@type': 'ListItem',
+    'position': 2,
+    'name': supportedLanguages[lang].name,
+    'item': canonicalUrl,
+  });
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': breadcrumbsList,
+};
+
+// Structured Data: HowTo
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  'name': t('howItWorks.title'),
+  'description': t('howItWorks.subtitle'),
+  'image': ogImageUrl,
+  'step': [
+    {
+      '@type': 'HowToStep',
+      'position': 1,
+      'name': t('howItWorks.s1Title'),
+      'text': t('howItWorks.s1Desc'),
+      'url': `${canonicalUrl}#how-it-works`,
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 2,
+      'name': t('howItWorks.s2Title'),
+      'text': t('howItWorks.s2Desc'),
+      'url': `${canonicalUrl}#how-it-works`,
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 3,
+      'name': t('howItWorks.s3Title'),
+      'text': t('howItWorks.s3Desc'),
+      'url': `${canonicalUrl}#how-it-works`,
+    },
+  ],
+};
+
+// Structured Data: FAQPage
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': t('faq.q1'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq.a1'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq.q2'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq.a2'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq.q3'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq.a3'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq.q4'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq.a4'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq.q5'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq.a5'),
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': t('faq.q6'),
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': t('faq.a6'),
+      },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang} dir={supportedLanguages[lang].dir} class="scroll-smooth">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-1YRVKXFKVZ"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1YRVKXFKVZ');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content={t('seo.keywords')} />
+    <meta name="author" content="MakeGIF" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="rating" content="general" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Bidirectional Hreflang Tags (all 6 locales + x-default) -->
+    {hreflangLinks.map((link) => (
+      <link rel="alternate" hreflang={link.lang} href={link.url} />
+    ))}
+
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#8B9A6E" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="MakeGIF" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={pageTitle} />
+    <meta property="og:locale" content={lang} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={pageTitle} />
+
+    <!-- Anti-FOUC (Flash of Unstyled Content) Script for Theme Resolution -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (stored === 'dark' || (!stored && systemDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          // Ignore localStorage errors in private browsing
+        }
+      })();
+    </script>
+
+    <!-- Optional COOP/COEP Service Worker for cross-origin isolation -->
+    <script is:inline src="/coi-serviceworker.js"></script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-ivory text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+    <Header lang={lang} />
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+  </body>
+</html>

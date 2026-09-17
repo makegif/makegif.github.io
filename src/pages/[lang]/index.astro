@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GifWorkspace from '../../components/GifWorkspace';
+import Features from '../../components/Features.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import Faq from '../../components/Faq.astro';
+import SupportBanner from '../../components/SupportBanner.astro';
+import { useTranslations } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'pt' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'ja' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang}>
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-6 sm:pt-20 sm:pb-10 overflow-hidden text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sage/15 dark:bg-sage/20 border border-sage/30 text-sage-800 dark:text-sage-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-sage animate-pulse"></span>
+        <span>{t('hero.badge')}</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
+        {t('hero.title')}{' '}
+        <span class="text-sage block sm:inline">{t('hero.titleHighlight')}</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="mt-4 sm:mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        {t('hero.subtitle')}
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Workspace Island -->
+  <section class="relative pb-16">
+    <GifWorkspace client:load lang={lang} />
+  </section>
+
+  <!-- Content & SEO Sections -->
+  <Features lang={lang} />
+  <HowItWorks lang={lang} />
+  <Faq lang={lang} />
+  <SupportBanner lang={lang} />
+</Layout>
